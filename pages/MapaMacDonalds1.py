@@ -2,6 +2,12 @@ import streamlit as st
 from streamlit_folium import st_folium
 import folium
 
+st.set_page_config(
+    page_title="Players",
+    page_icon="🏃🏼",
+    layout="wide"
+)
+df_data = st.session_state["data"]
 
 st.markdown("# 🗺️ Localização de Franquias do McDonald's")
 
