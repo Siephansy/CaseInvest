@@ -56,15 +56,24 @@ st.write("A previsão de retorno do investimento (payback) para uma unidade do M
 
 
 st.markdown("---")
+
+# Organizando os links em duas colunas
+col1, col2 = st.columns(2)
+
+# Adicionando links à primeira coluna
+with col1:
+    st.button("Casa Vogue", on_click=lambda: st.write("[Casa Vogue](https://casavogue.globo.com/LazerCultura/Restaurantes/noticia/2019/10/mcdonalds-abre-sua-milesima-unidade-no-brasil-em-casarao-na-avenida-paulista.html)"))
+    st.button("Pequenas Empresas Grandes Negócios", on_click=lambda: st.write("[PEGN](https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html)"))
+
+# Adicionando links à segunda coluna
+with col2:
+    st.button("Idinheiro", on_click=lambda: st.write("[Idinheiro](https://www.idinheiro.com.br/negocios/franquias/franquia-mcdonalds/)"))
+    st.button("Dicas de Franquia", on_click=lambda: st.write("[Dicas de Franquia](https://dicasdefranquia.com.br/mc-donalds/)"))
+    st.button("E-Investidor", on_click=lambda: st.write("[E-Investidor](https://einvestidor.estadao.com.br/radar-einvestidor/quanto-custa-investir-em-uma-franquia-do-mc-donalds/)"))
+
+
+st.markdown("---")
 st.markdown("### Sobre o App")
 st.write("Este app foi desenvolvido com base em dados reais e informações de mercado. \
          Ele é um recurso para investidores, analistas e entusiastas que desejam explorar as oportunidades \
          de negócio no setor de franquias do McDonald's.")
-
-
-st.markdown("# Acesse os sites das informações:")
-btn = st.link_button("Casa Vogue", "https://casavogue.globo.com/LazerCultura/Restaurantes/noticia/2019/10/mcdonalds-abre-sua-milesima-unidade-no-brasil-em-casarao-na-avenida-paulista.html")
-btn = st.link_button("Pequenas Empresas Grandes Negócios", "https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html")
-btn = st.link_button("Idinheiro", "https://www.idinheiro.com.br/negocios/franquias/franquia-mcdonalds/")
-btn = st.link_button("Dicas de Franquia", "https://dicasdefranquia.com.br/mc-donalds/")
-btn = st.link_button("E-Investidor", "https://einvestidor.estadao.com.br/radar-einvestidor/quanto-custa-investir-em-uma-franquia-do-mc-donalds/")
