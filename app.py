@@ -9,7 +9,7 @@ if "data" not in st.session_state:
     #df_data = df_data[df_data["Value(£)"] > 0]
     #df_data = df_data.sort_values(by="Overall", ascending=False)
 
-    
+
     # Aqui você pode substituir pelo dataset relevante para a análise de investimento em franquias
     df_data = pd.DataFrame({
         "Ano": [2018, 2019, 2020, 2021, 2022],
@@ -20,7 +20,6 @@ if "data" not in st.session_state:
 
 st.set_page_config(page_title="Análise de Investimento - Case McDonald's", layout="centered")
 st.markdown("# 🍟 Análise de Investimento de Negócios - Case McDonald's")
-st.sidebar.markdown("Desenvolvido por [Asimov Academy](https://asimov.academy)")
 
 
 btn = st.link_button("Acesse os dados no Kaggle", "https://www.kaggle.com/datasets/kevwesophia/fifa23-official-datasetclean-data")
@@ -65,7 +64,3 @@ st.markdown("### Sobre o App")
 st.write("Este app foi desenvolvido com base em dados reais e informações de mercado. \
          Ele é um recurso para investidores, analistas e entusiastas que desejam explorar as oportunidades \
          de negócio no setor de franquias do McDonald's.")
-st.write("Desenvolvido por [Asimov Academy](https://asimov.academy)")
-
-# Footer
-st.markdown("© 2024 [Asimov Academy](https://asimov.academy) - Todos os direitos reservados")
