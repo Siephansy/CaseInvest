@@ -22,7 +22,7 @@ st.set_page_config(page_title="Análise de Investimento - Case McDonald's", layo
 st.markdown("# 🍟 Análise de Investimento de Negócios - Case McDonald's")
 
 
-btn = st.link_button("Acesse os dados no Kaggle", "https://www.kaggle.com/datasets/kevwesophia/fifa23-official-datasetclean-data")
+
 
 st.markdown(
     """
@@ -54,13 +54,17 @@ st.table(df_costs)
 st.markdown("## ⏳ Tempo Médio de Retorno do Investimento")
 st.write("A previsão de retorno do investimento (payback) para uma unidade do McDonald's é de aproximadamente **5 anos**.")
 
-# Link para download do dataset e informações adicionais
-st.sidebar.markdown("### Links Úteis")
-st.sidebar.markdown("[🔗 Kaggle Dataset](https://www.kaggle.com/datasets/kevwesophia/fifa23-official-datasetclean-data)", unsafe_allow_html=True)
-st.sidebar.markdown("[🌐 Saiba mais sobre franquias do McDonald's](https://www.mcdonalds.com.br/)")
 
 st.markdown("---")
 st.markdown("### Sobre o App")
 st.write("Este app foi desenvolvido com base em dados reais e informações de mercado. \
          Ele é um recurso para investidores, analistas e entusiastas que desejam explorar as oportunidades \
          de negócio no setor de franquias do McDonald's.")
+
+
+st.markdown("# Acesse os sites das informações:")
+btn = st.link_button("Casa Vogue", "https://casavogue.globo.com/LazerCultura/Restaurantes/noticia/2019/10/mcdonalds-abre-sua-milesima-unidade-no-brasil-em-casarao-na-avenida-paulista.html")
+btn = st.link_button("Pequenas Empresas Grandes Negócios", "https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html")
+btn = st.link_button("Idinheiro", "https://www.idinheiro.com.br/negocios/franquias/franquia-mcdonalds/")
+btn = st.link_button("Dicas de Franquia", "https://dicasdefranquia.com.br/mc-donalds/")
+btn = st.link_button("E-Investidor", "https://einvestidor.estadao.com.br/radar-einvestidor/quanto-custa-investir-em-uma-franquia-do-mc-donalds/")
