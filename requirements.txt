@@ -78,3 +78,6 @@ uritemplate                  ==4.1.1
 urllib3                      ==2.2.3
 watchdog                     ==4.0.2
 wcwidth                      ==0.2.13
+PyPDF2==3.0.1
+python-docx==0.8.11
+docx2pdf==0.1.8
