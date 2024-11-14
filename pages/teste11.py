@@ -43,8 +43,8 @@ def convert_word_to_pdf(word_file):
     return output.getvalue()
 
 # Streamlit app
-st.sidebar.title('Navigation')
-page = st.sidebar.radio('Go to', ['Introduction', 'Introduction2', 'Converter'])
+st.sidebar.title('Navegação')
+page = st.sidebar.radio('Go to', ['Introdução', 'Slide Show', 'Conversor'])
 
 # Path to image directory
 image_dir = "./images"
@@ -57,8 +57,8 @@ image_list = [
     os.path.join(os.path.dirname(__file__), 'images', 'File Converter 3.jpg')
 ]
 
-if page == 'Introduction':
-    st.title('Welcome to the Universal File Converter App')
+if page == 'Introdução':
+    st.title('Conversor de Arquivos')
     
     with st.expander("Preview Images"):
         image_index = st.slider('Slider', 0, len(image_list) - 1)
@@ -70,11 +70,11 @@ if page == 'Introduction':
             st.error(f"Image not found: {image_list[image_index]}")
             st.write("Make sure the image files are located in the `images` folder.")
 
-elif page == 'Introduction2':
-    st.title('Welcome to the Universal File Converter App')
+elif page == 'Slide Show':
+    st.title('Conversor de Arquivos')
     
     # Slide de imagens com troca automática a cada 2 segundos
-    st.subheader("Introducing Universal File Converter: The Ultimate File Converter")
+    st.subheader("Introdução de Conversor de Arquivos")
     st.write("Desfrute de uma visualização automática das imagens!")
 
     # Loop automático para trocar as imagens a cada 2 segundos
@@ -83,9 +83,9 @@ elif page == 'Introduction2':
         placeholder.image(image_list[i], use_column_width=True)
         time.sleep(2)
     
-    st.write("Desfrute da nossa ferramenta!")
 
-elif page == 'Converter':
+
+elif page == 'Conversor':
     st.title('File Converter')
     
     conversion_type = st.selectbox("Select Conversion Type", ["PDF to Word", "Word to PDF"])
