@@ -60,6 +60,19 @@ image_list = [
 if page == 'Introduction':
     st.title('Welcome to the Universal File Converter App')
     
+    with st.expander("Preview Images"):
+        image_index = st.slider('Slider', 0, len(image_list) - 1)
+        
+        # Check if image path exists before displaying
+        if os.path.exists(image_list[image_index]):
+            st.image(image_list[image_index])
+        else:
+            st.error(f"Image not found: {image_list[image_index]}")
+            st.write("Make sure the image files are located in the `images` folder.")
+
+elif page == 'Introduction2':
+    st.title('Welcome to the Universal File Converter App')
+    
     # Slide de imagens com troca automática a cada 2 segundos
     st.subheader("Introducing Universal File Converter: The Ultimate File Converter")
     st.write("Desfrute de uma visualização automática das imagens!")
@@ -71,7 +84,7 @@ if page == 'Introduction':
         time.sleep(2)
     
     st.write("Desfrute da nossa ferramenta!")
-    
+
 elif page == 'Converter':
     st.title('File Converter')
     
