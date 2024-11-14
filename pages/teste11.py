@@ -47,7 +47,7 @@ page = st.sidebar.radio('Go to', ['Introduction', 'Converter'])
 
 if page == 'Introduction':
     st.title('Welcome to the Universal File Converter App')
-    # Image slider
+    # Image slider with error handling
     with st.expander("Preview Images"):
         image_list = [
             './images/File Converter.png',
@@ -56,7 +56,13 @@ if page == 'Introduction':
             './images/File Converter 3.jpg'
         ]
         image_index = st.slider('Slider', 0, len(image_list) - 1)
-        st.image(image_list[image_index])
+
+        # Check if image path exists before displaying
+        if os.path.exists(image_list[image_index]):
+            st.image(image_list[image_index])
+        else:
+            st.error(f"Image not found: {image_list[image_index]}")
+
     st.subheader("Introducing Universal File Converter: The Ultimate File Converter")
     st.write("""...""")  # Text truncated for brevity
     
