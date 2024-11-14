@@ -5,6 +5,7 @@ from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
+import time
 
 # Conversion functions
 def convert_pdf_to_word(pdf_file):
@@ -59,15 +60,17 @@ image_list = [
 if page == 'Introduction':
     st.title('Welcome to the Universal File Converter App')
     
-    with st.expander("Preview Images"):
-        image_index = st.slider('Slider', 0, len(image_list) - 1)
-        
-        # Check if image path exists before displaying
-        if os.path.exists(image_list[image_index]):
-            st.image(image_list[image_index])
-        else:
-            st.error(f"Image not found: {image_list[image_index]}")
-            st.write("Make sure the image files are located in the `images` folder.")
+    # Slide de imagens com troca automática a cada 2 segundos
+    st.subheader("Introducing Universal File Converter: The Ultimate File Converter")
+    st.write("Desfrute de uma visualização automática das imagens!")
+
+    # Loop automático para trocar as imagens a cada 2 segundos
+    placeholder = st.empty()
+    for i in range(0, len(image_list)):
+        placeholder.image(image_list[i], use_column_width=True)
+        time.sleep(2)
+    
+    st.write("Desfrute da nossa ferramenta!")
     
 elif page == 'Converter':
     st.title('File Converter')
