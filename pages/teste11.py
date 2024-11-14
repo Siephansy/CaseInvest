@@ -48,13 +48,13 @@ page = st.sidebar.radio('Go to', ['Introduction', 'Converter'])
 # Path to image directory
 image_dir = "./images"
 
-# List of images with full paths
-image_list = [os.path.join(image_dir, filename) for filename in [
-    "File Converter.png",
-    "File Converter 1.jpg",
-    "File Converter 2.png",
-    "File Converter 3.jpg"
-]]
+# Caminho absoluto ou relativo seguro para as imagens
+image_list = [
+    os.path.join(os.path.dirname(__file__), 'images', 'File Converter.png'),
+    os.path.join(os.path.dirname(__file__), 'images', 'File Converter 1.jpg'),
+    os.path.join(os.path.dirname(__file__), 'images', 'File Converter 2.png'),
+    os.path.join(os.path.dirname(__file__), 'images', 'File Converter 3.jpg')
+]
 
 if page == 'Introduction':
     st.title('Welcome to the Universal File Converter App')
