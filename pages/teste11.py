@@ -50,10 +50,10 @@ image_dir = "./images"
 
 # List of images with full paths
 image_list = [os.path.join(image_dir, filename) for filename in [
-    './images/File Converter.png',
-    './images/File Converter 1.jpg',
-    './images/File Converter 2.png',
-    './images/File Converter 3.jpg'
+    "File Converter.png",
+    "File Converter 1.jpg",
+    "File Converter 2.png",
+    "File Converter 3.jpg"
 ]]
 
 if page == 'Introduction':
