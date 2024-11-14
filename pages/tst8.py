@@ -1,6 +1,7 @@
 import streamlit as st
+import time
 
-# Perguntas e respostas
+# Dados do quiz
 quiz_data = [
     {
         "pergunta": "Qual é a capital da França?",
@@ -20,31 +21,39 @@ quiz_data = [
 ]
 
 # Função principal do app
-st.title("Quiz de Conhecimentos Gerais")
-
-# Armazenar respostas e pontuação
-respostas = []
-pontuacao = 0
-
-# Loop pelo quiz
-for idx, questao in enumerate(quiz_data):
-    st.subheader(f"Pergunta {idx + 1}")
-    st.write(questao["pergunta"])
-
-    # Opções de resposta como botões de rádio
-    resposta = st.radio("Escolha uma opção:", questao["opcoes"], key=idx)
-    respostas.append(resposta)
-
-    # Verificar resposta
-    if resposta == questao["resposta_correta"]:
-        pontuacao += 1
-
-# Botão para exibir pontuação final
-if st.button("Ver Resultado"):
-    st.write(f"Você acertou {pontuacao} de {len(quiz_data)} perguntas!")
+def main():
+    st.title("Quiz com Temporizador")
+    
+    pontuacao = 0
+    # Loop por cada pergunta
     for idx, questao in enumerate(quiz_data):
-        st.write(f"**Pergunta {idx + 1}:** {questao['pergunta']}")
-        st.write(f"Sua resposta: {respostas[idx]}")
-        st.write(f"Resposta correta: {questao['resposta_correta']}")
-        st.write("---")
+        st.subheader(f"Pergunta {idx + 1}")
+        st.write(questao["pergunta"])
 
+        # Exibe opções e espera resposta
+        resposta = st.radio("Escolha uma opção:", questao["opcoes"], key=idx)
+
+        # Temporizador de 5 segundos antes de mostrar o feedback
+        if st.button("Responder", key=f"responder_{idx}"):
+            st.write("Processando resposta...")
+
+            # Inicia o temporizador de 5 segundos
+            for seg in range(5, 0, -1):
+                st.write(f"Tempo restante para feedback: {seg} segundos")
+                time.sleep(1)
+            
+            # Feedback visual após 5 segundos
+            if resposta == questao["resposta_correta"]:
+                st.success("Correto! 🎉")
+                pontuacao += 1
+            else:
+                st.error("Incorreto! ❌")
+
+            st.write("---")
+
+    # Exibir pontuação final
+    if st.button("Ver Resultado"):
+        st.write(f"Você acertou {pontuacao} de {len(quiz_data)} perguntas!")
+
+if __name__ == "__main__":
+    main()
