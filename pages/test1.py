@@ -14,6 +14,9 @@ df = pd.DataFrame(data)
 # Page Title
 st.title("Google's Gemini Model Guide 🚀🤖")
 
+st.success("teste")
+st.sidebar.success("Select a demo above.")
+
 # Introduction to Google Gemini
 st.header("Introduction to Google Gemini")
 st.write("""

@@ -14,7 +14,7 @@ st.set_page_config(
 st.title("💬 App Chatbot :rainbow[Gemini]✨ Sederhana")
 
 
-# Koneksi API Gemini
+#  API Gemini
 API_KEY = st.secrets["API_GEMINI"]["API_KEY_GEMINI"]
 
 #Jawban Dari AI Gemini
