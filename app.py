@@ -66,7 +66,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.button("Casa Vogue", on_click=lambda: st.write("[Casa Vogue](https://casavogue.globo.com/LazerCultura/Restaurantes/noticia/2019/10/mcdonalds-abre-sua-milesima-unidade-no-brasil-em-casarao-na-avenida-paulista.html)"))
     st.button("Pequenas Empresas Grandes Negócios", on_click=lambda: st.write("[PEGN](https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html)"))
-    st.button("Pequenas Empresas Grandes Negócios", on_click=lambda: st.write("[PEGN](https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html)"))
+    st.button("Pequenas Empresas Grandes Negóciosm", on_click=lambda: st.write("[PEGN](https://revistapegn.globo.com/Franquias/noticia/2021/11/saiba-quanto-custa-uma-franquia-do-mcdonalds.html)"))
 
 # Adicionando links à segunda coluna
 with col2:
