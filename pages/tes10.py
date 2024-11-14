@@ -104,9 +104,3 @@ elif page == 'Converter':
             if pdf_data:
                 st.download_button(label="Download PDF file", data=pdf_data, file_name="converted.pdf")
 
-
-
-
-
-
-#streamlit run "Universal File Converter.py"
