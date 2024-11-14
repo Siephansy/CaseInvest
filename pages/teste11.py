@@ -44,7 +44,7 @@ def convert_word_to_pdf(word_file):
 
 # Streamlit app
 st.sidebar.title('Navigation')
-page = st.sidebar.radio('Go to', ['Introduction', 'Converter'])
+page = st.sidebar.radio('Go to', ['Introduction', 'Introduction2', 'Converter'])
 
 # Path to image directory
 image_dir = "./images"
