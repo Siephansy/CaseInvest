@@ -29,17 +29,20 @@ def main():
     if "pontuacao" not in st.session_state:
         st.session_state.pontuacao = 0
 
+    # Verificar se as alternativas já foram embaralhadas
+    if "embaralhado" not in st.session_state:
+        # Embaralha as opções de resposta apenas uma vez no início
+        for questao in quiz_data:
+            random.shuffle(questao["opcoes"])
+        st.session_state.embaralhado = True
+
     # Loop por cada pergunta
     for idx, questao in enumerate(quiz_data):
         st.subheader(f"Pergunta {idx + 1}")
         st.write(questao["pergunta"])
 
-        # Embaralha as opções de resposta
-        opcoes = questao["opcoes"][:]
-        random.shuffle(opcoes)
-
         # Exibe opções e espera resposta
-        resposta = st.radio("Escolha uma opção:", opcoes, key=idx)
+        resposta = st.radio("Escolha uma opção:", questao["opcoes"], key=idx)
 
         # Temporizador de 5 segundos antes de mostrar o feedback
         if st.button("Responder", key=f"responder_{idx}"):
