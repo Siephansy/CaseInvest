@@ -20,32 +20,31 @@ quiz_data = [
 ]
 
 # Função principal do app
-def main():
-    st.title("Quiz de Conhecimentos Gerais")
+st.title("Quiz de Conhecimentos Gerais")
 
-    # Armazenar respostas e pontuação
-    respostas = []
-    pontuacao = 0
+# Armazenar respostas e pontuação
+respostas = []
+pontuacao = 0
 
-    # Loop pelo quiz
+# Loop pelo quiz
+for idx, questao in enumerate(quiz_data):
+    st.subheader(f"Pergunta {idx + 1}")
+    st.write(questao["pergunta"])
+
+    # Opções de resposta como botões de rádio
+    resposta = st.radio("Escolha uma opção:", questao["opcoes"], key=idx)
+    respostas.append(resposta)
+
+    # Verificar resposta
+    if resposta == questao["resposta_correta"]:
+        pontuacao += 1
+
+# Botão para exibir pontuação final
+if st.button("Ver Resultado"):
+    st.write(f"Você acertou {pontuacao} de {len(quiz_data)} perguntas!")
     for idx, questao in enumerate(quiz_data):
-        st.subheader(f"Pergunta {idx + 1}")
-        st.write(questao["pergunta"])
-
-        # Opções de resposta como botões de rádio
-        resposta = st.radio("Escolha uma opção:", questao["opcoes"], key=idx)
-        respostas.append(resposta)
-
-        # Verificar resposta
-        if resposta == questao["resposta_correta"]:
-            pontuacao += 1
-
-    # Botão para exibir pontuação final
-    if st.button("Ver Resultado"):
-        st.write(f"Você acertou {pontuacao} de {len(quiz_data)} perguntas!")
-        for idx, questao in enumerate(quiz_data):
-            st.write(f"**Pergunta {idx + 1}:** {questao['pergunta']}")
-            st.write(f"Sua resposta: {respostas[idx]}")
-            st.write(f"Resposta correta: {questao['resposta_correta']}")
-            st.write("---")
+        st.write(f"**Pergunta {idx + 1}:** {questao['pergunta']}")
+        st.write(f"Sua resposta: {respostas[idx]}")
+        st.write(f"Resposta correta: {questao['resposta_correta']}")
+        st.write("---")
 
