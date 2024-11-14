@@ -1,49 +1,84 @@
-import os
-import unittest
-from pathlib import Path
+# Copyright (c) Streamlit Inc. (2018-2022) Snowflake Inc. (2022)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-from streamlit.testing.v1 import AppTest
+from typing import Any
 
-APP_PATH = os.getenv("APP_PATH", default="streamlit_app.py")
-SKIP_SMOKE = os.getenv("SKIP_SMOKE", "False").lower() in ("true", "1", "t")
+import numpy as np
 
-
-def get_file_paths() -> list[str]:
-    """Get a list of file paths for the main page + each page in the pages folder."""
-    page_folder = Path(APP_PATH).parent / "pages"
-    if not page_folder.exists():
-        return [APP_PATH]
-    page_files = page_folder.glob("*.py")
-    file_paths = [str(file.absolute().resolve()) for file in page_files]
-    return [APP_PATH] + file_paths
-
-
-def pytest_generate_tests(metafunc):
-    """
-    This is a special function that is called automatically by pytest to generate tests.
-    https://docs.pytest.org/en/7.1.x/how-to/parametrize.html#pytest-generate-tests
-
-    This generates list of file paths for each page in the pages folder, which will
-    automatically be used if a test function has an argument called "file_path".
-
-    Each file path will be the absolute path to each file, but the test ids will be
-    just the file name. This is so that the test output is easier to read.
-
-    st_smoke_test.py::test_smoke_page[streamlit_app.py] PASSED                  [ 33%]
-    st_smoke_test.py::test_smoke_page[p1.py] PASSED                             [ 66%]
-    st_smoke_test.py::test_smoke_page[p2.py] PASSED                             [100%]
-    """
-    if "file_path" in metafunc.fixturenames:
-        metafunc.parametrize(
-            "file_path", get_file_paths(), ids=lambda x: x.split("/")[-1]
-        )
+import streamlit as st
+from streamlit.hello.utils import show_code
 
 
-@unittest.skipIf(SKIP_SMOKE, "smoke test is disabled by config")
-def test_smoke_page(file_path):
-    """
-    This will run a basic test on each page in the pages folder, checking to see that
-    there are no exceptions raised while the app runs.
-    """
-    at = AppTest.from_file(file_path, default_timeout=100).run()
-    assert not at.exception
+def animation_demo() -> None:
+
+    # Interactive Streamlit elements, like these sliders, return their value.
+    # This gives you an extremely simple interaction model.
+    iterations = st.sidebar.slider("Level of detail", 2, 20, 10, 1)
+    separation = st.sidebar.slider("Separation", 0.7, 2.0, 0.7885)
+
+    # Non-interactive elements return a placeholder to their location
+    # in the app. Here we're storing progress_bar to update it later.
+    progress_bar = st.sidebar.progress(0)
+
+    # These two elements will be filled in later, so we create a placeholder
+    # for them using st.empty()
+    frame_text = st.sidebar.empty()
+    image = st.empty()
+
+    m, n, s = 960, 640, 400
+    x = np.linspace(-m / s, m / s, num=m).reshape((1, m))
+    y = np.linspace(-n / s, n / s, num=n).reshape((n, 1))
+
+    for frame_num, a in enumerate(np.linspace(0.0, 4 * np.pi, 100)):
+        # Here were setting value for these two elements.
+        progress_bar.progress(frame_num)
+        frame_text.text("Frame %i/100" % (frame_num + 1))
+
+        # Performing some fractal wizardry.
+        c = separation * np.exp(1j * a)
+        Z = np.tile(x, (n, 1)) + 1j * np.tile(y, (1, m))
+        C = np.full((n, m), c)
+        M: Any = np.full((n, m), True, dtype=bool)
+        N = np.zeros((n, m))
+
+        for i in range(iterations):
+            Z[M] = Z[M] * Z[M] + C[M]
+            M[np.abs(Z) > 2] = False
+            N[M] = i
+
+        # Update the image placeholder by calling the image() function on it.
+        image.image(1.0 - (N / N.max()), use_column_width=True)
+
+    # We clear elements by calling empty on them.
+    progress_bar.empty()
+    frame_text.empty()
+
+    # Streamlit widgets automatically run the script from top to bottom. Since
+    # this button is not connected to any other logic, it just causes a plain
+    # rerun.
+    st.button("Re-run")
+
+
+st.set_page_config(page_title="Animation Demo", page_icon="📹")
+st.markdown("# Animation Demo")
+st.sidebar.header("Animation Demo")
+st.write(
+    """This app shows how you can use Streamlit to build cool animations.
+It displays an animated fractal based on the the Julia Set. Use the slider
+to tune different parameters."""
+)
+
+animation_demo()
+
+show_code(animation_demo)
