@@ -45,26 +45,29 @@ def convert_word_to_pdf(word_file):
 st.sidebar.title('Navigation')
 page = st.sidebar.radio('Go to', ['Introduction', 'Converter'])
 
+# Path to image directory
+image_dir = "./images"
+
+# List of images with full paths
+image_list = [os.path.join(image_dir, filename) for filename in [
+    "File Converter.png",
+    "File Converter 1.jpg",
+    "File Converter 2.png",
+    "File Converter 3.jpg"
+]]
+
 if page == 'Introduction':
     st.title('Welcome to the Universal File Converter App')
-    # Image slider with error handling
+    
     with st.expander("Preview Images"):
-        image_list = [
-            './images/File Converter.png',
-            './images/File Converter 1.jpg',
-            './images/File Converter 2.png',
-            './images/File Converter 3.jpg'
-        ]
         image_index = st.slider('Slider', 0, len(image_list) - 1)
-
+        
         # Check if image path exists before displaying
         if os.path.exists(image_list[image_index]):
             st.image(image_list[image_index])
         else:
             st.error(f"Image not found: {image_list[image_index]}")
-
-    st.subheader("Introducing Universal File Converter: The Ultimate File Converter")
-    st.write("""...""")  # Text truncated for brevity
+            st.write("Make sure the image files are located in the `images` folder.")
     
 elif page == 'Converter':
     st.title('File Converter')
