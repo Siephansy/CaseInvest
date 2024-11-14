@@ -61,10 +61,3 @@ col1.metric(label="Valor de mercado", value=f"£ {player_stats['Value(£)']:,}")
 col2.metric(label="Remuneração semanal", value=f"£ {player_stats['Wage(£)']:,}")
 col3.metric(label="Cláusula de rescisão", value=f"£ {player_stats['Release Clause(£)']:,}")
 
-
-
-# pylint: disable=line-too-long,invalid-name
-"""
-This module demonstrates the usage of the Vertex AI Gemini 1.5 API within a Streamlit application.
-"""
-
