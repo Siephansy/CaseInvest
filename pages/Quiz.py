@@ -21,6 +21,21 @@ quiz_data = [
     }
 ]
 
+# Função para mostrar o placar que pisca
+def show_score(score, is_correct):
+    # Se a resposta foi correta, mostramos o placar com uma animação
+    if is_correct:
+        st.markdown(f"""
+        <div style="font-size: 40px; color: green; animation: blink 1s step-end infinite;">Você acertou! Pontuação: {score}</div>
+        <style>
+            @keyframes blink {{
+                50% {{color: red;}}
+            }}
+        </style>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"**Pontuação: {score}**", unsafe_allow_html=True)
+
 # Função principal do app
 def main():
     st.title("Quiz com Temporizador")
@@ -35,6 +50,9 @@ def main():
         for questao in quiz_data:
             random.shuffle(questao["opcoes"])
         st.session_state.embaralhado = True
+
+    # Exibe o placar grande no topo
+    show_score(st.session_state.pontuacao, is_correct=False)
 
     # Loop por cada pergunta
     for idx, questao in enumerate(quiz_data):
@@ -57,8 +75,10 @@ def main():
             if resposta == questao["resposta_correta"]:
                 st.success("Correto! 🎉")
                 st.session_state.pontuacao += 1
+                show_score(st.session_state.pontuacao, is_correct=True)  # Mostra o placar com animação
             else:
                 st.error("Incorreto! ❌")
+                show_score(st.session_state.pontuacao, is_correct=False)  # Mostra o placar normal
 
             st.write("---")
 
