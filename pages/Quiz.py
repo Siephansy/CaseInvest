@@ -21,6 +21,19 @@ quiz_data = [
     }
 ]
 
+
+# Inicialização do estado
+if "initialized" not in st.session_state:
+    # Configuração inicial de pontuação
+    st.session_state.pontuacao = 0
+
+    # Embaralha as opções para cada pergunta
+    for questao in quiz_data:
+        random.shuffle(questao["opcoes"])
+
+    # Marca como inicializado
+    st.session_state.initialized = True
+
 # Função para mostrar o placar que pisca em RGB
 def show_score(score, is_correct):
     # Se a resposta foi correta, mostramos o placar com animação RGB
