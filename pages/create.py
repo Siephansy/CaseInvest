@@ -161,9 +161,6 @@ st.button("Rerun")
 
 
 
-st.set_page_config(page_title="Efeitos Interativos", layout="centered")
-
-st.title("🌟 Efeitos Interativos no Streamlit 🌟")
 
 # Escolha de efeito
 effect = st.radio(
