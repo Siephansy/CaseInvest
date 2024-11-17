@@ -85,4 +85,3 @@ reportlab
 streamlit-elements==0.1.*
 plotly
 base64
-io
