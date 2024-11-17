@@ -82,4 +82,22 @@ if st.button("✨ Surpresa Final"):
     st.balloons()
     for _ in range(3):
         st.snow()
+        st.confetti()
         time.sleep(0.5)
+
+progress_bar = st.progress(0)
+
+for i in range(100):
+    time.sleep(0.1)
+    progress_bar.progress(i + 1)
+
+
+st.image("https://www.example.com/success_image.png", caption="Sucesso!", use_column_width=True)
+
+
+st.success("Parabéns! Você completou o quiz!")
+
+st.warning("Parabéns quiz!")
+st.error("Parabou o quiz!")
+st.success("Paracompleto")
+st.info("Pariz!")
