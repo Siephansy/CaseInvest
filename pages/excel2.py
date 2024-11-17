@@ -13,7 +13,6 @@ def generate_excel_download_link(df):
     href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="data_download.xlsx">📥 Download Excel File 📊</a>'
     return st.markdown(href, unsafe_allow_html=True)
 
-
 # Function to generate HTML download link for the plot
 def generate_html_download_link(fig):
     towrite = StringIO()
@@ -24,14 +23,14 @@ def generate_html_download_link(fig):
     return st.markdown(href, unsafe_allow_html=True)
 
 # Set page configuration
-st.set_page_config(page_title='Enhanced Excel Plotter', layout='wide', initial_sidebar_state='expanded')
+st.set_page_config(page_title='Dynamic Excel Plotter', layout='wide', initial_sidebar_state='expanded')
 
 # Sidebar
 st.sidebar.title("About 📘")
 st.sidebar.info("This app allows you to upload an Excel file, visualize its data, and download the visualized data. 🚀")
 
 # Main content
-st.title('Enhanced Excel Plotter 📈')
+st.title('Dynamic Excel Plotter 📈')
 st.subheader('Upload your Excel file and let the magic happen! ✨')
 
 uploaded_file = st.file_uploader('Choose a XLSX file 📁', type='xlsx')
@@ -41,37 +40,46 @@ if uploaded_file:
     df = pd.read_excel(uploaded_file, engine='openpyxl')
     st.dataframe(df.style.highlight_max(axis=0))  # Highlight max values for better visualization
 
-    # Verificar colunas disponíveis
-    available_columns = df.columns.tolist()
-    st.write("### Available Columns in Your Data")
-    st.write(available_columns)
-
     st.markdown('### Data Analysis 🔍')
-    expected_columns = ['Ship Mode', 'Segment', 'Category', 'Sub-Category']
-    valid_columns = [col for col in expected_columns if col in available_columns]
+    all_columns = df.columns.tolist()  # Dynamic array of all columns
+    st.write("### Available Columns in Your Data")
+    st.write(all_columns)
 
-    if not valid_columns:
-        st.error("The uploaded file does not contain any of the expected columns for analysis.")
+    # User selects a column for grouping
+    groupby_column = st.selectbox(
+        'Select a column for grouping 📊:',
+        all_columns
+    )
+
+    # User selects numerical columns for analysis
+    numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
+    st.write("### Numeric Columns Available for Analysis")
+    st.write(numeric_columns)
+
+    if not numeric_columns:
+        st.error("No numeric columns available in the data for analysis.")
     else:
-        groupby_column = st.selectbox(
-            'Select a column for analysis 📊:',
-            valid_columns
+        analysis_columns = st.multiselect(
+            'Select numerical columns for analysis:',
+            numeric_columns,
+            default=numeric_columns[:2]  # Pre-select the first two if available
         )
 
-        # Group DataFrame
-        output_columns = ['Sales', 'Profit']
-        if all(col in df.columns for col in output_columns):
-            df_grouped = df.groupby(by=[groupby_column], as_index=False)[output_columns].sum()
+        if not analysis_columns:
+            st.warning("Please select at least one numerical column for analysis.")
+        else:
+            # Group DataFrame
+            df_grouped = df.groupby(by=[groupby_column], as_index=False)[analysis_columns].sum()
 
             # Plot DataFrame
             fig = px.bar(
                 df_grouped,
                 x=groupby_column,
-                y='Sales',
-                color='Profit',
-                color_continuous_scale=['red', 'yellow', 'green'],
-                template='plotly_dark',  # Dark theme for the plot
-                title=f'Sales & Profit by {groupby_column}'
+                y=analysis_columns[0],  # Default to the first selected column for plotting
+                color=analysis_columns[0],
+                color_continuous_scale='Viridis',
+                template='plotly_dark',
+                title=f'{analysis_columns[0]} by {groupby_column}'
             )
             st.plotly_chart(fig, use_container_width=True)
 
@@ -79,5 +87,3 @@ if uploaded_file:
             st.markdown('### Downloads 📥')
             generate_excel_download_link(df_grouped)
             generate_html_download_link(fig)
-        else:
-            st.error("The data does not contain the required columns: 'Sales' and 'Profit'.")
