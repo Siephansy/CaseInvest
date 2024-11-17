@@ -85,3 +85,6 @@ reportlab
 streamlit-elements==0.1.*
 plotly.graph_objects
 plotly
+plotly.express
+base64
+io
