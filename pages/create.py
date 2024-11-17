@@ -101,3 +101,94 @@ st.warning("Parabéns quiz!")
 st.error("Parabou o quiz!")
 st.success("Paracompleto")
 st.info("Pariz!")
+
+
+st.toast('Your edited image was saved!', icon='😍')
+
+
+if st.button('Three cheers'):
+    st.toast('Hip!')
+    time.sleep(.5)
+    st.toast('Hip!')
+    time.sleep(.5)
+    st.toast('Hooray!', icon='🎉')
+
+
+
+def cook_breakfast():
+    msg = st.toast('Gathering ingredients...')
+    time.sleep(1)
+    msg.toast('Cooking...')
+    time.sleep(1)
+    msg.toast('Ready!', icon = "🥞")
+
+if st.button('Cook breakfast'):
+    cook_breakfast()
+
+
+
+with st.spinner('Wait for it...'):
+    time.sleep(5)
+st.success("Done!")
+
+
+
+with st.status("Downloading data..."):
+    st.write("Searching for data...")
+    time.sleep(2)
+    st.write("Found URL.")
+    time.sleep(1)
+    st.write("Downloading data...")
+    time.sleep(1)
+
+st.button("Rerun")
+
+
+
+
+with st.status("Downloading data...", expanded=True) as status:
+    st.write("Searching for data...")
+    time.sleep(2)
+    st.write("Found URL.")
+    time.sleep(1)
+    st.write("Downloading data...")
+    time.sleep(1)
+    status.update(
+        label="Download complete!", state="complete", expanded=False
+    )
+
+st.button("Rerun")
+
+
+
+st.set_page_config(page_title="Efeitos Interativos", layout="centered")
+
+st.title("🌟 Efeitos Interativos no Streamlit 🌟")
+
+# Escolha de efeito
+effect = st.radio(
+    "Escolha um efeito para visualizar 🎉",
+    options=["🎈 Balões", "❄️ Neve", "📊 Barra de Progresso", "🔔 Alertas"],
+)
+
+# Botão para ativar o efeito
+if st.button("Ativar Efeito"):
+    if effect == "🎈 Balões":
+        st.balloons()
+    elif effect == "❄️ Neve":
+        st.snow()
+    elif effect == "📊 Barra de Progresso":
+        st.write("Carregando progresso...")
+        progress_bar = st.progress(0)
+        for i in range(100):
+            time.sleep(0.05)  # Pequena pausa para simular carregamento
+            progress_bar.progress(i + 1)
+        st.success("Progresso concluído! 🎉")
+    elif effect == "🔔 Alertas":
+        st.warning("Este é um alerta de aviso! ⚠️")
+        st.error("Ocorreu um erro! ❌")
+        st.success("Tudo está funcionando perfeitamente! ✅")
+        st.info("Aqui está uma informação adicional. ℹ️")
+
+# Mensagem de rodapé
+st.markdown("✨ Explore os efeitos interativos no Streamlit para deixar sua aplicação mais divertida e dinâmica!")
