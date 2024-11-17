@@ -157,7 +157,7 @@ with st.status("Downloading data...", expanded=True) as status:
         label="Download complete!", state="complete", expanded=False
     )
 
-st.button("Rerun")
+st.button("Rerun2")
 
 
 
