@@ -19,13 +19,14 @@ def generate_art():
     for _ in range(50):
         shape_type = random.choice(["circle", "line", "rectangle"])
         color = tuple(random.choices(range(256), k=3))
-        xy = [random.randint(0, img_size) for _ in range(4)]
+        x1, y1, x2, y2 = sorted(random.randint(0, img_size) for _ in range(2)), sorted(random.randint(0, img_size) for _ in range(2))
+
         if shape_type == "circle":
-            draw.ellipse(xy, fill=color, outline=None)
+            draw.ellipse([x1[0], y1[0], x2[1], y2[1]], fill=color, outline=None)
         elif shape_type == "line":
-            draw.line(xy, fill=color, width=3)
+            draw.line([x1[0], y1[0], x2[1], y2[1]], fill=color, width=3)
         elif shape_type == "rectangle":
-            draw.rectangle(xy, fill=color, outline=None)
+            draw.rectangle([x1[0], y1[0], x2[1], y2[1]], fill=color, outline=None)
 
     return img
 
