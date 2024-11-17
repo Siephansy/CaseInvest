@@ -86,3 +86,4 @@ streamlit-elements==0.1.*
 plotly
 openpyxl
 matplotlib
+rembg==2.0.34      # Para remoção de fundo
