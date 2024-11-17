@@ -85,3 +85,4 @@ reportlab
 streamlit-elements==0.1.*
 plotly
 openpyxl
+matplotlib
