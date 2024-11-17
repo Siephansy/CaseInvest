@@ -108,3 +108,4 @@ ydata-profiling
 ipython
 ipywidgets
 streamlit-aggrid
+mediapipe
