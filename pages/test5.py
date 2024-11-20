@@ -41,7 +41,7 @@ def plotting_demo():
     # Streamlit widgets automatically run the script from top to bottom. Since
     # this button is not connected to any other logic, it just causes a plain
     # rerun.
-    st.button("Re-run")
+    st.button("Re-run", key="rerun_button")
 
 
 st.set_page_config(page_title="Plotting Demo", page_icon="📈")
@@ -105,7 +105,7 @@ def animation_demo() -> None:
     # Streamlit widgets automatically run the script from top to bottom. Since
     # this button is not connected to any other logic, it just causes a plain
     # rerun.
-    st.button("Re-run2")
+    st.button("Re-run2", key="rerun_button2")
 
 
 
