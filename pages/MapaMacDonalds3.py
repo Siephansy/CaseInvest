@@ -245,28 +245,11 @@ with elements("dashboard"):
     with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
         mui.Paper("First item", key="first_item")
         with elements("media_player"):
-            # Play video from many third-party sources: YouTube, Facebook, Twitch,
-            # SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, DailyMotion and Kaltura.
-            #
-            # This element is powered by ReactPlayer (GitHub link below).
-
             from streamlit_elements import media
-
             media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
-
-
-
-
-with elements("media_player"):
-
-    # Play video from many third-party sources: YouTube, Facebook, Twitch,
-    # SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, DailyMotion and Kaltura.
-    #
-    # This element is powered by ReactPlayer (GitHub link below).
-
-    from streamlit_elements import media
-
-    media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
-
+        mui.Paper("First item2", key="first_item2")
+        with elements("media_player"):
+            from streamlit_elements import media
+            media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
 
 
