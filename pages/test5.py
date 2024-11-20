@@ -55,8 +55,6 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 
 plotting_demo()
 
-show_code(plotting_demo)
-
 
 def animation_demo() -> None:
 
@@ -118,5 +116,3 @@ to tune different parameters."""
 )
 
 animation_demo()
-
-show_code(animation_demo)
