@@ -6,7 +6,6 @@ from PIL import Image
 
 # URL da imagem
 image_url = "https://via.placeholder.com/300"  # Substitua pela URL da sua imagem
-image = Image.open("sua_imagem.jpg")  # Substitua pelo caminho da sua imagem
 
 # Exibir a imagem no sidebar
 st.sidebar.image(image_url, caption="Minha Imagem Online", use_column_width=True)
