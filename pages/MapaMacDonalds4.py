@@ -11,12 +11,7 @@ st.markdown("# 🗺️ Localização de Franquias do McDonald's")
 latitude, longitude = -23.550520, -46.633308  # São Paulo, Brasil
 map = folium.Map(location=[latitude, longitude], zoom_start=12)
 
-# Adicionando um marcador
-folium.Marker(
-    location=[-23.563988, -46.654731],
-    popup="McDonald's - Avenida Paulista",
-    tooltip="Clique para mais informações",
-).add_to(map)
+
 
 # Configurando iframe do Google Maps
 google_maps_iframe = """
@@ -36,6 +31,12 @@ with elements("dashboard"):
         # Mapa do Folium
         with mui.Card(key="mapa"):
             st_folium(map, width=700, height=500)
+            # Adicionando um marcador
+            folium.Marker(
+                location=[-23.563988, -46.654731],
+                popup="McDonald's - Avenida Paulista",
+                tooltip="Clique para mais informações",
+            ).add_to(map)
 
         # Iframe do Google Maps
         with mui.Card(key="iframe"):
