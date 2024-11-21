@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_folium import st_folium
 import folium
-from streamlit_elements import elements, mui, dashboard, media
+from streamlit_elements import elements, dashboard, mui, media
 
 # Configuração inicial
 st.set_page_config(layout="wide")
@@ -11,44 +11,45 @@ st.markdown("# 🗺️ Localização de Franquias do McDonald's")
 latitude, longitude = -23.550520, -46.633308  # São Paulo, Brasil
 map = folium.Map(location=[latitude, longitude], zoom_start=12)
 
-
+# Adicionando um marcador
+folium.Marker(
+    location=[-23.563988, -46.654731],
+    popup="McDonald's - Avenida Paulista",
+    tooltip="Clique para mais informações",
+).add_to(map)
 
 # Configurando iframe do Google Maps
 google_maps_iframe = """
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.5416344698983!2d-46.656497985021065!3d-23.561531484682776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce58583d14c6b7%3A0x9c6fb81eb64a5bb1!2sMcDonald's%20-%20Av.%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1605463652291!5m2!1spt-BR!2sbr" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.5416344698983!2d-46.656497985021065!3d-23.561531484682776!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce58583d14c6b7%3A0x9c6fb81eb64a5bb1!2sMcDonald's%20-%20Av.%20Paulista!5e0!3m2!1spt-BR!2sbr!4v1605463652291!5m2!1spt-BR!2sbr" 
+width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 """
 
-# Criando layout do painel
+# Criando layout do painel arrastável
 layout = [
-    dashboard.Item("mapa", 0, 0, 6, 4),
-    dashboard.Item("iframe", 6, 0, 6, 4),
-    dashboard.Item("video", 0, 4, 6, 3),
-    dashboard.Item("texto", 6, 4, 6, 3),
+    dashboard.Item("mapa", 0, 0, 6, 4),  # Mapa
+    dashboard.Item("iframe", 6, 0, 6, 4),  # Google Maps
+    dashboard.Item("video", 0, 4, 6, 3),  # Vídeo
+    dashboard.Item("texto", 6, 4, 6, 3),  # Texto adicional
 ]
 
+# Criando o painel com todos os elementos
 with elements("dashboard"):
     with dashboard.Grid(layout):
-        # Mapa do Folium
+        # Renderizando o mapa do Folium
         with mui.Card(key="mapa"):
-            st_folium(map, width=700, height=500)
-            # Adicionando um marcador
-            folium.Marker(
-                location=[-23.563988, -46.654731],
-                popup="McDonald's - Avenida Paulista",
-                tooltip="Clique para mais informações",
-            ).add_to(map)
+            st_folium(map, width=600, height=400)
 
-        # Iframe do Google Maps
+        # Renderizando o iframe do Google Maps
         with mui.Card(key="iframe"):
             st.markdown(google_maps_iframe, unsafe_allow_html=True)
 
-        # Player de vídeo
+        # Renderizando o player de vídeo
         with mui.Card(key="video"):
             media.Player(
                 url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True
             )
 
-        # Texto ou informações adicionais
+        # Renderizando a seção de texto adicional
         with mui.Card(key="texto"):
             st.markdown("### Informações adicionais")
             st.write(
