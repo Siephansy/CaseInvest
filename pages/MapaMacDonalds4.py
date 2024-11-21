@@ -9,14 +9,17 @@ st.markdown("# 🗺️ Localização de Franquias do McDonald's")
 
 # Criando o mapa com Folium
 latitude, longitude = -23.550520, -46.633308  # São Paulo, Brasil
-map = folium.Map(location=[latitude, longitude], zoom_start=12)
+folium_map = folium.Map(location=[latitude, longitude], zoom_start=12)
 
 # Adicionando um marcador
 folium.Marker(
     location=[-23.563988, -46.654731],
     popup="McDonald's - Avenida Paulista",
     tooltip="Clique para mais informações",
-).add_to(map)
+).add_to(folium_map)
+
+# Salvando o mapa como HTML
+folium_map_html = folium_map._repr_html_()
 
 # Configurando iframe do Google Maps
 google_maps_iframe = """
@@ -24,10 +27,10 @@ google_maps_iframe = """
 width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 """
 
-# Criando layout do painel arrastável
+# Layout do painel arrastável
 layout = [
-    dashboard.Item("mapa", 0, 0, 6, 4),  # Mapa
-    dashboard.Item("iframe", 6, 0, 6, 4),  # Google Maps
+    dashboard.Item("folium_map", 0, 0, 6, 4),  # Mapa Folium
+    dashboard.Item("google_map", 6, 0, 6, 4),  # Google Maps
     dashboard.Item("video", 0, 4, 6, 3),  # Vídeo
     dashboard.Item("texto", 6, 4, 6, 3),  # Texto adicional
 ]
@@ -36,11 +39,11 @@ layout = [
 with elements("dashboard"):
     with dashboard.Grid(layout):
         # Renderizando o mapa do Folium
-        with mui.Card(key="mapa"):
-            st_folium(map, width=600, height=400)
+        with mui.Card(key="folium_map", sx={"padding": "1em"}):
+            st.markdown(f"<div>{folium_map_html}</div>", unsafe_allow_html=True)
 
         # Renderizando o iframe do Google Maps
-        with mui.Card(key="iframe"):
+        with mui.Card(key="google_map", sx={"padding": "1em"}):
             st.markdown(google_maps_iframe, unsafe_allow_html=True)
 
         # Renderizando o player de vídeo
