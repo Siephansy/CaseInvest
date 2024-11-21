@@ -223,7 +223,7 @@ with elements("dashboard"):
 
     layout = [
         # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
-        dashboard.Item("first_item", 0, 0, 2, 2),
+        dashboard.Item("first_item", 0, 0, 2, 2), 
         dashboard.Item("second_item", 2, 0, 2, 2, isDraggable=False, moved=False),
         dashboard.Item("third_item", 0, 2, 1, 1, isResizable=False),
     ]
@@ -233,6 +233,10 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
+        with elements("media_player"):
+            from streamlit_elements import media
+            media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
+
 
     # If you want to retrieve updated layout values as the user move or resize dashboard items,
     # you can pass a callback to the onLayoutChange event parameter.
