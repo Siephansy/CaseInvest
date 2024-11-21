@@ -130,88 +130,6 @@ mapping_demo()
 
 
 
-
-with elements("nested_children"):
-
-    # You can nest children using multiple 'with' statements.
-    #
-    # <Paper>
-    #   <Typography>
-    #     <p>Hello world</p>
-    #     <p>Goodbye world</p>
-    #   </Typography>
-    # </Paper>
-
-    with mui.Paper:
-        with mui.Typography:
-            html.p("Hello world")
-            html.p("Goodbye world")
-
-
-
-with elements("properties"):
-
-    # You can add properties to elements with named parameters.
-    #
-    # To find all available parameters for a given element, you can
-    # refer to its related documentation on mui.com for MUI widgets,
-    # on https://microsoft.github.io/monaco-editor/ for Monaco editor,
-    # and so on.
-    #
-    # <Paper elevation={3} variant="outlined" square>
-    #   <TextField label="My text input" defaultValue="Type here" variant="outlined" />
-    # </Paper>
-
-    with mui.Paper(elevation=3, variant="outlined", square=True):
-        mui.TextField(
-            label="My text input",
-            defaultValue="Type here",
-            variant="outlined",
-        )
-
-    # If you must pass a parameter which is also a Python keyword, you can append an
-    # underscore to avoid a syntax error.
-    #
-    # <Collapse in />
-
-    mui.Collapse(in_=True)
-
-    # mui.collapse(in=True)
-    # > Syntax error: 'in' is a Python keyword:
-
-
-
-
-
-
-with elements("callbacks_hotkey"):
-
-    # Invoke a callback when a specific hotkey sequence is pressed.
-    #
-    # For more information regarding sequences syntax and supported keys,
-    # go to Mousetrap's project page linked below.
-    #
-    # /!\ Hotkeys work if you don't have focus on Streamlit Elements's frame /!\
-    # /!\ As with other callbacks, this reruns the whole app /!\
-
-    from streamlit_elements import event
-
-    def hotkey_pressed():
-        print("Hotkey pressed")
-
-    event.Hotkey("g", hotkey_pressed)
-
-    # If you want your hotkey to work even in text fields, set bind_inputs to True.
-    event.Hotkey("h", hotkey_pressed, bindInputs=True)
-    mui.TextField(label="Try pressing 'h' while typing some text here.")
-
-    # If you want to override default hotkeys (ie. ctrl+f to search in page),
-    # set overrideDefault to True.
-    event.Hotkey("ctrl+f", hotkey_pressed, overrideDefault=True)
-
-
-
-
 with elements("dashboard"):
 
     # You can create a draggable and resizable dashboard using
@@ -223,7 +141,7 @@ with elements("dashboard"):
 
     layout = [
         # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
-        dashboard.Item("first_item", 0, 0, 2, 2), 
+        dashboard.Item("first_item", 0, 0, 2, 2),
         dashboard.Item("second_item", 2, 0, 2, 2, isDraggable=False, moved=False),
         dashboard.Item("third_item", 0, 2, 1, 1, isResizable=False),
     ]
@@ -233,10 +151,6 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
-        with elements("media_player"):
-            from streamlit_elements import media
-            media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
-
 
     # If you want to retrieve updated layout values as the user move or resize dashboard items,
     # you can pass a callback to the onLayoutChange event parameter.
@@ -249,11 +163,28 @@ with elements("dashboard"):
     with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
         mui.Paper("First item", key="first_item")
         with elements("media_player"):
+            # Play video from many third-party sources: YouTube, Facebook, Twitch,
+            # SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, DailyMotion and Kaltura.
+            #
+            # This element is powered by ReactPlayer (GitHub link below).
+
             from streamlit_elements import media
+
             media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
-        mui.Paper("First item2", key="first_item2")
-        with elements("media_player"):
-            from streamlit_elements import media
-            media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
+
+
+
+
+with elements("media_player"):
+
+    # Play video from many third-party sources: YouTube, Facebook, Twitch,
+    # SoundCloud, Streamable, Vimeo, Wistia, Mixcloud, DailyMotion and Kaltura.
+    #
+    # This element is powered by ReactPlayer (GitHub link below).
+
+    from streamlit_elements import media
+
+    media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
+
 
 
