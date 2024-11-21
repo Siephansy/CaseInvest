@@ -27,17 +27,17 @@ google_maps_iframe = """
 width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 """
 
-# Layout do painel arrastável
+# Configuração do layout do dashboard
 layout = [
-    dashboard.Item("folium_map", 0, 0, 6, 4),  # Mapa Folium
-    dashboard.Item("google_map", 6, 0, 6, 4),  # Google Maps
-    dashboard.Item("video", 0, 4, 6, 3),  # Vídeo
-    dashboard.Item("texto", 6, 4, 6, 3),  # Texto adicional
+    dashboard.Item("folium_map", 0, 0, 6, 4, isResizable=True, isDraggable=True),
+    dashboard.Item("google_map", 6, 0, 6, 4, isResizable=True, isDraggable=True),
+    dashboard.Item("video", 0, 4, 6, 3, isResizable=True, isDraggable=True),
+    dashboard.Item("texto", 6, 4, 6, 3, isResizable=True, isDraggable=True),
 ]
 
-# Criando o painel com todos os elementos
+# Configuração do painel drag-and-drop
 with elements("dashboard"):
-    with dashboard.Grid(layout):
+    with dashboard.Grid(layout, draggableHandle=".draggable", style={"height": "90vh"}):
         # Renderizando o mapa do Folium
         with mui.Card(key="folium_map", sx={"padding": "1em"}):
             st.markdown(f"<div>{folium_map_html}</div>", unsafe_allow_html=True)
@@ -47,13 +47,13 @@ with elements("dashboard"):
             st.markdown(google_maps_iframe, unsafe_allow_html=True)
 
         # Renderizando o player de vídeo
-        with mui.Card(key="video"):
+        with mui.Card(key="video", sx={"padding": "1em"}):
             media.Player(
                 url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True
             )
 
         # Renderizando a seção de texto adicional
-        with mui.Card(key="texto"):
+        with mui.Card(key="texto", sx={"padding": "1em"}):
             st.markdown("### Informações adicionais")
             st.write(
                 "Este é um exemplo de painel arrastável que combina mapas, vídeos e informações adicionais!"
