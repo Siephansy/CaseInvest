@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import re
 #import gspread  # Para integração com o Google Sheets
-from oauth2client.service_account import ServiceAccountCredentials  # Para autenticação com o Google Sheets
+#from oauth2client.service_account import ServiceAccountCredentials  # Para autenticação com o Google Sheets
 # Importe as bibliotecas para a API da IA que você escolher (DeepSeek ou Gemini)
 # Exemplo para Gemini:
 # from google.generativeai import text_generation
