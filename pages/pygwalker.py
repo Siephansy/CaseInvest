@@ -11,19 +11,16 @@ st.set_page_config(
 # Add Title
 st.title("Use Pygwalker In Streamlit")
 
-# You should cache your pygwalker renderer, if you don't want your memory to explode
-@st.cache_resource
-def get_pyg_renderer():
-    csv_path = "./bike_sharing_dc.csv"
-    if not os.path.exists(csv_path):
-        st.error(f"CSV file not found: {csv_path}")
-        return None
-    df = pd.read_csv(csv_path)
+# File uploader
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
     # If you want to use feature of saving chart config, set `spec_io_mode="rw"`
     from pygwalker.api.streamlit import StreamlitRenderer
-    return StreamlitRenderer(df, spec="./gw_config.json", spec_io_mode="rw")
-
-renderer = get_pyg_renderer()
-
-if renderer:
-    renderer.explorer()
+    renderer = StreamlitRenderer(df, spec="./gw_config.json", spec_io_mode="rw")
+    
+    if renderer:
+        renderer.explorer()
+else:
+    st.info("Please upload a CSV file to proceed.")
